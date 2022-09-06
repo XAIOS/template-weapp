@@ -1,0 +1,12 @@
+{
+  "name": "pomelo",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {},
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@vant/weapp": "^1.10.4"
+  }
+}

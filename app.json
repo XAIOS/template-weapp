@@ -1,0 +1,24 @@
+{
+  "pages": [
+    "pages/demo/index"
+  ],
+  "usingComponents": {
+    "van-empty": "@vant/weapp/empty/index"
+  },
+  "window": {
+    "navigationBarTitleText": "",
+    "navigationBarTextStyle": "white",
+    "navigationBarBackgroundColor": "#f76264"
+  },
+  "tabBar": {
+    "color": "#353535",
+    "selectedColor": "#f76c6c",
+    "list": [{
+      "text": "首页",
+      "pagePath": "pages/index/index",
+      "iconPath": "image/tab/00.png",
+      "selectedIconPath": "image/tab/01.png"
+    }]
+  },
+  "sitemapLocation": "sitemap.json"
+}
