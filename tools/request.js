@@ -33,8 +33,12 @@ function Request(method, api, data = {}) {
     let is_login = api == config.login_api
     let id = (Math.random() * 10000).toFixed(0)
 
+    // token，或叫第三方 session，其管理是自动化的，实际项目中不应操作或关注
+    // 每次启动小程序会在调用接口前先获取一次 token
+    // 当 token 获取时所有的请求会被挂起，直到 token 获取成功
+
     REQUEST_STORE[id] = () => {
-      if (!is_login && is_loading) return setTimeout(REQUEST_STORE[id], 1000)
+      if (!is_login && is_loading) return setTimeout(REQUEST_STORE[id], 800)
 
       if (!is_login && !token) return Login(REQUEST_STORE[id])
 
@@ -42,6 +46,7 @@ function Request(method, api, data = {}) {
         url: /^https?\:\/\//.test(api) ? api : `${config.host}${api}`,
         data,
         method,
+        // token 的应用方法，要跟接口方沟通协商
         header: { token },
         success(res) {
           if (res.statusCode != 200) {
@@ -50,6 +55,12 @@ function Request(method, api, data = {}) {
           }
 
           res = res.data
+
+          // 约定的返回结构，code data message
+          // code 1 为轻提示，接口错误，用 toast 显示错误信息
+          // code 2 为重提示，接口错误，用 alert 显示错误信息
+          // code 3 为登录态异常，重新获取 token
+          // code 0 为接口正常，返回 data 供继续操作
 
           if (res.code == 1)
             Message.info(res.message)
@@ -79,6 +90,11 @@ export function Get(api, data = {}) {
 }
 
 export function Post(api, data = {}) {
+  if (data._params) {
+    api += `?${Object.keys(data._params).map(i => `${i}=${data._params[i]}`).join('&')}`
+    delete data._params
+  }
+
   return Request('POST', api, data)
 }
 

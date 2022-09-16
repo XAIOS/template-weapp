@@ -5,7 +5,9 @@ const map = {
 }
 
 export default function(path, query, type) {
-  let url = path.includes('/') ? path : [`../${path}/index`, query].filter(i => i).join('?')
+  query = typeof query == 'object' ? Object.keys(query).map(i => `${i}=${query[i]}`).join('&') : query
+
+  let url = path.includes('/') ? path : [`/pages/${path}/index`, query].filter(i => i).join('?')
 
   if (type == 'format') return url
 

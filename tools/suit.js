@@ -1,11 +1,7 @@
-let sw, sh
-
 export default function(w, h, dw = 750, dh = 1206) {
-  if (!sh) {
-    let screen = wx.getSystemInfoSync()
-    sw = screen.windowWidth
-    sh = screen.windowHeight
-  }
+  let screen = wx.getSystemInfoSync()
+  let sw = screen.windowWidth
+  let sh = screen.windowHeight
 
   let s = w / h
   let w1 = w / dw * sw

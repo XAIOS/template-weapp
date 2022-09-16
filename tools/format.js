@@ -1,8 +1,6 @@
-function FormatNum(num) {
-  return `${100 + num}`.slice(1)
-}
+const FormatNum = num => `${100 + num}`.slice(1)
 
-export default function(time, format = 'yyyy-MM-dd hh:mm:ss') {
+export function FormatTime(time, format = 'yyyy-MM-dd hh:mm:ss') {
   if (typeof format != 'string' || time == 0 || !time) return '--'
 
   let time_num = +time
@@ -29,4 +27,29 @@ export default function(time, format = 'yyyy-MM-dd hh:mm:ss') {
   let t5 = FormatNum(time.getSeconds())
 
   return format.replace(/yyyy/g, t0).replace(/MM/g, t1).replace(/dd/g, t2).replace(/hh/g, t3).replace(/mm/g, t4).replace(/ss/g, t5)
+}
+
+const JUDGE = {
+  k: 1000,
+  w: 10000,
+  kw: 10000000
+}
+
+export function FormatNumber(num) {
+  if (num < 1000) return num
+
+  let result = num, judge
+
+  Object.keys(JUDGE).some(i => {
+    let temp = num / JUDGE[i]
+
+    if (temp > 1) {
+      result = temp
+      judge = i
+    } else {
+      return true
+    }
+  })
+
+  return result.toFixed(2) + judge
 }

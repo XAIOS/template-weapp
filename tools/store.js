@@ -1,33 +1,33 @@
-const state = {}
-const action = {}
+const STATE = {}
+const ACTION = {}
 
 export default {
   add(key, val) {
-    action[key] = [val => state[key] = val]
-    state[key] = val
+    ACTION[key] = [val => STATE[key] = val]
+    STATE[key] = val
   },
   set(key, val) {
-    action[key].forEach(todo => todo(val))
+    ACTION[key].forEach(todo => todo(val))
   },
   get(key) {
-    return state[key]
+    return STATE[key]
   },
   bind(host, key) {
     let Todo = val => host.setData({ [key]: val })
-    let length = action[key].push(Todo)
+    let length = ACTION[key].push(Todo)
 
-    Todo(state[key])
+    Todo(STATE[key])
 
     Object.defineProperty(host, key, {
-      get: () => state[key],
-      set: val => action[key].forEach(todo => todo(val))
+      get: () => STATE[key],
+      set: val => ACTION[key].forEach(todo => todo(val))
     })
 
-    return () => this.unbind(key, length - 1)
+    return () => this._unbind(key, length - 1)
   },
-  unbind(key, index) {
-    delete action[key][index]
+  _unbind(key, index) {
+    delete ACTION[key][index]
     clearTimeout(this.timer)
-    this.timer = setTimeout(() => action[key] = action[key].filter(i => i), 300)
+    this.timer = setTimeout(() => ACTION[key] = ACTION[key].filter(i => i), 300)
   }
 }

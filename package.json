@@ -1,12 +1,13 @@
 {
-  "name": "pomelo",
-  "version": "1.0.0",
-  "description": "",
-  "main": "app.js",
-  "scripts": {},
-  "author": "",
-  "license": "ISC",
+  "name": "template-weapp",
+  "author": "aizhifeng",
+  "description": "微信小程序项目模板",
+  "version": "1.0.1",
   "dependencies": {
-    "@vant/weapp": "^1.10.4"
+    "@vant/weapp": "^1.10.5"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/xaios/template-weapp.git"
   }
 }
