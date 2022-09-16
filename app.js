@@ -20,7 +20,7 @@ App({
     // 全局默认的分享信息
     return {
       title: 'TemplateWeapp',
-      path: '/page/index/index'
+      path: '/pages/index/index'
       // 分享图片的比例是 5:4
       // imageUrl: ''
     }
