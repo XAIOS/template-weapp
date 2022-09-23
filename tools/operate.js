@@ -59,7 +59,7 @@ export const Loading = {
 }
 
 export function Copy(data) {
-  data = data.toString()
+  data = JSON.stringify(data)
 
   return new Promise(resolve => {
     wx.setClipboardData({ data }).then(() => {
